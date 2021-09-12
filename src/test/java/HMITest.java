@@ -9,6 +9,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.Scanner;
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -16,7 +19,7 @@ public class HMITest {
 
     public static ChromeDriver driver;
     public static String IdText = "";
-    public static String IdPump = "";
+    public static String IdWindowPump = "";
 
     public WebElement getShadowRootElement(WebElement element) {
         WebElement ele = (WebElement) ((JavascriptExecutor)driver)
@@ -27,18 +30,11 @@ public class HMITest {
     @BeforeAll
     static void setUp() throws IOException {
 
-        FileReader fr = new FileReader("C:\\Users\\kiril\\Desktop\\Autotests\\IDE\\Data.txt");
-        Scanner scan = new Scanner(fr);
-        String[] GetDataId = new String[4];
-        int i = 1;
-        while (scan.hasNextLine()) {
-            GetDataId[i] = scan.nextLine();
-            System.out.println(GetDataId[i]);
-            i++;
-        }
-        fr.close();
-        IdText = GetDataId[1];
-        IdPump = GetDataId[3];
+        String fileName = "C:\\Users\\kiril\\Desktop\\Autotests\\IDE\\Data.csv";
+        Optional<String> line = Files.lines(Paths.get(fileName)).findFirst();
+        String[] words = line.get().split(",");
+        IdText = words[0];
+        IdWindowPump = words[2];
 
         System.setProperty("webdriver.chrome.driver","C:\\Users\\kiril\\Desktop\\Autotests\\chromedriver_win32\\chromedriver.exe");
         ChromeOptions ChromeOptions = new ChromeOptions();
@@ -53,7 +49,9 @@ public class HMITest {
     @Tag("HMI")
     @Order(1)
     public void GetTitle() throws InterruptedException {
-        driver.get("http://"+System.getProperty("HostIP")+"/");
+        //String Host = "http://"+System.getProperty("HostIP")+"/";
+        String Host = "http://127.0.0.1:8043/";
+        driver.get(Host);
         String title = driver.getTitle();
         WebDriverWait waitForOne = new WebDriverWait(driver, 1000);
 
@@ -67,10 +65,10 @@ public class HMITest {
     @Order(2)
     public void PumpStart() throws InterruptedException {
 
-        WebElement element = driver.findElement(By.xpath("//*[@id='" + IdPump + "']"));
+        WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
         element.click();
         Thread.sleep(1000);
-        WebElement element1 = driver.findElement(By.xpath("//*[@id='18438']"));
+        WebElement element1 = driver.findElement(By.xpath("//*[@id='18715']"));
         element1.click();
         Thread.sleep(1000);
         WebElement shadowRootPump = getShadowRootElement(element);
@@ -87,8 +85,8 @@ public class HMITest {
     @Order(3)
     public void PumpStop() throws InterruptedException {
 
-        WebElement element = driver.findElement(By.xpath("//*[@id='" + IdPump + "']"));
-        WebElement element1 = driver.findElement(By.xpath("//*[@id='18494']"));
+        WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
+        WebElement element1 = driver.findElement(By.xpath("//*[@id='18771']"));
         element1.click();
         Thread.sleep(1000);
         WebElement shadowRootPump = getShadowRootElement(element);
@@ -105,8 +103,8 @@ public class HMITest {
     @Order(4)
     public void PumpStartTwo() throws InterruptedException {
 
-        WebElement element = driver.findElement(By.xpath("//*[@id='" + IdPump + "']"));
-        WebElement element1 = driver.findElement(By.xpath("//*[@id='18438']"));
+        WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
+        WebElement element1 = driver.findElement(By.xpath("//*[@id='18715']"));
         element1.click();
         Thread.sleep(1000);
         WebElement shadowRootPump = getShadowRootElement(element);
