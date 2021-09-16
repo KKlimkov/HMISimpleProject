@@ -68,7 +68,7 @@ public class HMITest {
         WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
         element.click();
         Thread.sleep(1000);
-        WebElement element1 = driver.findElement(By.xpath("//*[@id='18715']"));
+        WebElement element1 = driver.findElement(By.xpath("//*[@id='18733']"));
         element1.click();
         Thread.sleep(1000);
         WebElement shadowRootPump = getShadowRootElement(element);
@@ -86,7 +86,7 @@ public class HMITest {
     public void PumpStop() throws InterruptedException {
 
         WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
-        WebElement element1 = driver.findElement(By.xpath("//*[@id='18771']"));
+        WebElement element1 = driver.findElement(By.xpath("//*[@id='18789']"));
         element1.click();
         Thread.sleep(1000);
         WebElement shadowRootPump = getShadowRootElement(element);
@@ -104,7 +104,7 @@ public class HMITest {
     public void PumpStartTwo() throws InterruptedException {
 
         WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
-        WebElement element1 = driver.findElement(By.xpath("//*[@id='18715']"));
+        WebElement element1 = driver.findElement(By.xpath("//*[@id='18733']"));
         element1.click();
         Thread.sleep(1000);
         WebElement shadowRootPump = getShadowRootElement(element);
