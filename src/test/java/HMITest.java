@@ -1,3 +1,4 @@
+import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -13,14 +14,22 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.Scanner;
+import io.qameta.allure.LabelAnnotation;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
+@Owner("KKlimkov")
+@Feature("HMITestCases")
 @TestMethodOrder(OrderAnnotation.class)
 public class HMITest {
 
     public static ChromeDriver driver;
     public static String IdText = "";
     public static String IdWindowPump = "";
-
     public WebElement getShadowRootElement(WebElement element) {
         WebElement ele = (WebElement) ((JavascriptExecutor)driver)
                 .executeScript("return arguments[0].shadowRoot", element);
@@ -28,6 +37,7 @@ public class HMITest {
     }
 
     @BeforeAll
+    @Step("Запуск драйвера и чтение id файлов")
     static void setUp() throws IOException {
 
         String fileName = "C:\\Users\\kiril\\Desktop\\Autotests\\IDE\\Data.csv";
@@ -46,23 +56,27 @@ public class HMITest {
 
     @DisplayName("ConnectAndTitle")
     @Test
-    @Tag("HMI")
+    @Tags({@Tag("HMI"),@Tag("ProjectTitle")})
+    @Story("Base.Objects Насос")
     @Order(1)
+    @Step("Проверка имени тестового проекта")
     public void GetTitle() throws InterruptedException {
-        //String Host = "http://"+System.getProperty("HostIP")+"/";
-        String Host = "http://127.0.0.1:8043/";
+        String Host = "http://"+System.getProperty("HostIP")+"/";
+        //String Host = "http://127.0.0.1:8043/";
         driver.get(Host);
         String title = driver.getTitle();
         WebDriverWait waitForOne = new WebDriverWait(driver, 1000);
-
         assertTrue(title.equals("Тестовый проект"));
+        //HMISteps.AttemptUseStep(driver,"Тестовый проект");
         Thread.sleep(1000);
     }
 
     @DisplayName("StartPump")
+    @Story("Base.Objects Насос")
     @Test
     @Tag("HMI")
     @Order(2)
+    @Step("Запуск насоса")
     public void PumpStart() throws InterruptedException {
 
         WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
@@ -83,6 +97,8 @@ public class HMITest {
     @Test
     @Tag("HMI")
     @Order(3)
+    @Step("Отключение насоса")
+    @Story("Base.Objects Насос")
     public void PumpStop() throws InterruptedException {
 
         WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
@@ -101,6 +117,8 @@ public class HMITest {
     @Test
     @Tag("HMI")
     @Order(4)
+    @Step("Включение насоса")
+    @Story("Base.Objects Насос")
     public void PumpStartTwo() throws InterruptedException {
 
         WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
@@ -119,6 +137,8 @@ public class HMITest {
     @Test
     @Tag("HMI")
     @Order(5)
+    @Step("Закрытие всплываюшего окна")
+    @Story("Base.Objects Насос")
     public void ClosePopUP() throws InterruptedException {
 
     WebElement element3 = driver.findElement(By.xpath("/html/body/div[2]/ms-popup"));
@@ -136,6 +156,7 @@ public class HMITest {
     }
 
     @AfterAll
+    @Step("Отключение web-драйвера")
     public static void cleanUp(){
         driver.quit();
         System.out.println("After All cleanUp() method called");
