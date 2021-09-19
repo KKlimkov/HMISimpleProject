@@ -94,12 +94,12 @@ public class HMITest {
         assertTrue(SVGClass.equals("Start"));
     }
 
-    @DisplayName("StopPump")
     @Test
-    @Tag("HMI")
+    @DisplayName("StopPump")
+    @Story("Base.Objects Pump")
+    @Tags({@Tag("HMI"),@Tag("ProjectTitle")})
     @Order(3)
     @Step("Отключение насоса")
-    @Story("Base.Objects Насос")
     public void PumpStop() throws InterruptedException {
 
         WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
@@ -116,10 +116,11 @@ public class HMITest {
 
     @DisplayName("StartPumpTwo")
     @Test
-    @Tag("HMI")
+    @Story("Base.Objects Pump")
+    @Tags({@Tag("HMI"),@Tag("ProjectTitle")})
     @Order(4)
     @Step("Включение насоса")
-    @Story("Base.Objects Насос")
+
     public void PumpStartTwo() throws InterruptedException {
 
         WebElement element = driver.findElement(By.xpath("//*[@id='" + IdWindowPump + "']"));
@@ -134,12 +135,13 @@ public class HMITest {
         assertTrue(SVGClass.equals("Start"));
     }
 
-    @DisplayName("ClosePopUP")
     @Test
-    @Tag("HMI")
+    @DisplayName("ClosePopUP")
     @Order(5)
+    @Story("Base.Objects Pump")
+    @Tags({@Tag("HMI"),@Tag("ProjectTitle")})
     @Step("Закрытие всплываюшего окна")
-    @Story("Base.Objects Насос")
+
     public void ClosePopUP() throws InterruptedException {
 
     WebElement element3 = driver.findElement(By.xpath("/html/body/div[2]/ms-popup"));
