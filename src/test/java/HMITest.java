@@ -16,7 +16,7 @@ import java.util.Optional;
 
 
 @Owner("KKlimkov")
-@Layer("web")
+@Layer("HMI")
 @Feature("BaseObjects")
 
 @TestMethodOrder(OrderAnnotation.class)
