@@ -1,3 +1,5 @@
+package kklimkovtests;
+
 import io.qameta.allure.*;
 import io.qameta.allure.model.Link;
 import org.junit.jupiter.api.*;
@@ -18,8 +20,8 @@ import java.util.Optional;
 @Owner("KKlimkov")
 @Layer("HMI")
 @Feature("BaseObjects")
-
 @TestMethodOrder(OrderAnnotation.class)
+
 public class HMITest {
 
     public static ChromeDriver driver;
@@ -27,7 +29,7 @@ public class HMITest {
     public static String IdWindowPump = "";
     public WebElement getShadowRootElement(WebElement element) {
         WebElement ele = (WebElement) ((JavascriptExecutor)driver)
-                .executeScript("return arguments[0].shadowRoot", element);
+                        .executeScript("return arguments[0].shadowRoot", element);
         return ele;
     }
 
@@ -67,7 +69,7 @@ public class HMITest {
         String title = driver.getTitle();
         WebDriverWait waitForOne = new WebDriverWait(driver, 1000);
         assertTrue(title.equals("Тестовый проект"));
-        //HMISteps.AttemptUseStep(driver,"Тестовый проект");
+        //kklimkovtests.HMISteps.AttemptUseStep(driver,"Тестовый проект");
         Thread.sleep(1000);
 
     }

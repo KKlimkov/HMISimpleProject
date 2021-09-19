@@ -1,5 +1,6 @@
-import io.qameta.allure.LabelAnnotation;
+package kklimkovtests;
 
+import io.qameta.allure.LabelAnnotation;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
