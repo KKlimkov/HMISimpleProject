@@ -1,4 +1,5 @@
 import io.qameta.allure.*;
+import io.qameta.allure.model.Link;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -25,6 +26,7 @@ import java.lang.annotation.Target;
 @Owner("KKlimkov")
 @Feature("HMITestCases")
 @TestMethodOrder(OrderAnnotation.class)
+
 public class HMITest {
 
     public static ChromeDriver driver;
@@ -61,6 +63,11 @@ public class HMITest {
     @Order(1)
     @Step("Проверка имени тестового проекта")
     public void GetTitle() throws InterruptedException {
+        Allure.addLinks(new Link()
+                .withName("TFS 13514")
+                .withUrl("http://vpn.mps-soft.ru:8080/DefaultCollection/" +
+                        "MS4/_workitems?id=13514&triage=true&fullScreen=false&_a=edit"));
+
         String Host = "http://"+System.getProperty("HostIP")+"/";
         //String Host = "http://127.0.0.1:8043/";
         driver.get(Host);
@@ -69,6 +76,7 @@ public class HMITest {
         assertTrue(title.equals("Тестовый проект"));
         //HMISteps.AttemptUseStep(driver,"Тестовый проект");
         Thread.sleep(1000);
+
     }
 
     @DisplayName("StartPump")
