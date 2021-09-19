@@ -10,23 +10,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
-import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Optional;
-import java.util.Scanner;
-import io.qameta.allure.LabelAnnotation;
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+
 
 @Owner("KKlimkov")
-@Feature("HMITestCases")
-@TestMethodOrder(OrderAnnotation.class)
+@Layer("web")
+@Feature("BaseObjects")
 
+@TestMethodOrder(OrderAnnotation.class)
 public class HMITest {
 
     public static ChromeDriver driver;
@@ -56,10 +49,10 @@ public class HMITest {
         System.out.println("test start");
     }
 
-    @DisplayName("ConnectAndTitle")
     @Test
+    @DisplayName("ConnectAndTitle")
+    @Story("Base.Objects Pump")
     @Tags({@Tag("HMI"),@Tag("ProjectTitle")})
-    @Story("Base.Objects Насос")
     @Order(1)
     @Step("Проверка имени тестового проекта")
     public void GetTitle() throws InterruptedException {
@@ -80,9 +73,9 @@ public class HMITest {
     }
 
     @DisplayName("StartPump")
-    @Story("Base.Objects Насос")
     @Test
-    @Tag("HMI")
+    @Story("Base.Objects Pump")
+    @Tags({@Tag("HMI"),@Tag("ProjectTitle")})
     @Order(2)
     @Step("Запуск насоса")
     public void PumpStart() throws InterruptedException {
