@@ -20,12 +20,10 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.8.10/aspectjweaver-1.8.10.jar"
                     </argLine>
 
-
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
 
                     </systemPropertyVariables>
-
                     <!-- deprecated -->
                     <systemProperties>
                         <property>

@@ -1,4 +1,4 @@
-package kklimkovtests;
+package com.kklimkovtests;
 
 import io.qameta.allure.LabelAnnotation;
 import java.lang.annotation.Documented;
