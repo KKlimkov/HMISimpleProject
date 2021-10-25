@@ -22,7 +22,7 @@ public class HMITest {
     @BeforeAll
     @Step("Запуск драйвера и чтение id файлов")
     static void setUp() throws IOException, InterruptedException {
-        String fileName = "C:\\Users\\kiril\\Desktop\\Autotests\\IDE\\Data.csv";
+        String fileName = "C:\\Users\\Public\\Autotests\\Data.csv";
         Optional<String> line = Files.lines(Paths.get(fileName)).findFirst();
         String[] words = line.get().split(",");
         IdText = words[0];
